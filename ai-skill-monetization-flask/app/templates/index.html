@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="topbar">
+  <div class="brand"><span class="mark">Skill Ledger</span><span class="sub">monetization predictor</span></div>
+</div>
+
+<div class="app">
+  <form class="ledger-panel" action="{{ url_for('main.predict') }}" method="post" id="ledgerForm">
+    <p class="panel-intro">Enter what you can do. The ledger prices it against current market demand and shows where it's worth the most.</p>
+
+    <div class="field-block">
+      <label class="field-label">Experience level</label>
+      <div class="seg">
+        <input type="radio" name="experience" id="exp-new" value="0.7">
+        <label for="exp-new">New</label>
+        <input type="radio" name="experience" id="exp-working" value="1" checked>
+        <label for="exp-working">Working</label>
+        <input type="radio" name="experience" id="exp-seasoned" value="1.25">
+        <label for="exp-seasoned">Seasoned</label>
+        <input type="radio" name="experience" id="exp-expert" value="1.5">
+        <label for="exp-expert">Expert</label>
+      </div>
+    </div>
+
+    <div class="field-block">
+      <label class="field-label">Interested in (optional, shapes recommendations)</label>
+      <div class="chip-grid">
+        {% for cat in categories %}
+        <input type="checkbox" name="interests[]" id="int-{{ loop.index }}" value="{{ cat }}">
+        <label for="int-{{ loop.index }}">{{ cat }}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="field-block">
+      <label class="field-label">Add a skill</label>
+      <div class="skill-input-row">
+        <input type="text" id="skillInput" list="skillOptions" placeholder="e.g. Copywriting, Python, Video Editing" autocomplete="off">
+        <button type="button" id="addSkillBtn">Add</button>
+      </div>
+      <datalist id="skillOptions">
+        {% for s in catalog %}<option value="{{ s.name }}">{% endfor %}
+      </datalist>
+
+      <div class="entry-list" id="entryList"></div>
+      <div class="empty-note" id="emptyNote">No skills added yet — add at least one to run the ledger.</div>
+
+      <!-- hidden inputs synced from the entry list just before submit -->
+      <div id="hiddenInputs"></div>
+    </div>
+
+    <button type="submit" class="run-btn" id="runBtn" disabled>Price my skills</button>
+  </form>
+
+  <div class="dashboard">
+    <div class="placeholder">
+      <h2>Nothing priced yet</h2>
+      <p>Add your skills on the left, rate how strong each one is, then run the ledger to see where they're worth the most right now.</p>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

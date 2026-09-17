@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="topbar">
+  <div class="brand"><span class="mark">Skill Ledger</span><span class="sub">monetization predictor</span></div>
+  <a class="topbar-link" href="{{ url_for('main.index') }}">&larr; Price another skill set</a>
+</div>
+
+<div class="dashboard" style="max-width:980px; margin:0 auto;">
+  <p class="share-note">Shareable link for this result: <code>{{ request.url }}</code></p>
+
+  <div class="hero">
+    <div>
+      <p class="hero-title">Estimated monthly potential</p>
+      <div class="hero-value">${{ "{:,}".format(results.total_low) }}–${{ "{:,}".format(results.total_high) }}<span class="unit">/mo</span></div>
+      <p class="hero-caption">Based on part-time hours across your strongest paths, at current market rates.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="n">{{ results.scored|length }}</div><div class="l">skills priced</div></div>
+      <div class="hstat"><div class="n">{{ results.ledger_score }}</div><div class="l">ledger score /100</div></div>
+      <div class="hstat"><div class="n">{{ results.paths|length }}</div><div class="l">viable paths</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Monetization paths</h2><span class="note">ranked by fit</span></div>
+    {% if results.paths %}
+      {% for p in results.paths %}
+      <div class="path-row">
+        <div class="path-rank">{{ "%02d"|format(loop.index) }}</div>
+        <div class="path-main">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.desc }}</p>
+          <div class="path-platforms">{{ p.platforms }}</div>
+        </div>
+        <div class="path-fit">
+          <div class="fit-bar-track"><div class="fit-bar-fill" style="width:{{ p.fit }}%"></div></div>
+          <div class="fit-num">{{ p.fit }}/100 fit</div>
+        </div>
+        <div class="path-range">${{ "{:,}".format(p.low) }}–${{ "{:,}".format(p.high) }}<span class="l">est. / month</span></div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty-note">Add a few more skills to surface viable paths.</p>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Category coverage</h2><span class="note">where your portfolio concentrates</span></div>
+    {% for c in results.coverage %}
+    <div class="cov-row">
+      <div class="cov-label">{{ c.category }}</div>
+      <div class="cov-track"><div class="cov-fill" style="width:{{ c.pct }}%"></div></div>
+      <div class="cov-pct">{{ c.pct }}%</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Skill gaps worth closing</h2><span class="note">nearby skills, high demand</span></div>
+    {% if results.gaps %}
+      {% for g in results.gaps %}
+      <div class="gap-row">
+        <div class="gap-main">
+          <div class="name">{{ g.name }}</div>
+          <div class="why">{{ g.why }}</div>
+        </div>
+        <div class="gap-tag">demand {{ g.demand }}/10</div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty-note">Your current skills already cover their category well.</p>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Next 30 days</h2></div>
+    <div class="roadmap">
+      {% for s in results.roadmap %}
+      <div class="step">
+        <div class="step-num">{{ loop.index }}</div>
+        <div class="step-body"><h4>{{ s.title }}</h4><p>{{ s.body }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer class="disclaimer">
+    Estimates are directional, built from typical freelance and platform rates for each category — not a quote, guarantee, or financial forecast. Actual earnings depend on your portfolio, location, niche, and the hours you put in.
+  </footer>
+</div>
+{% endblock %}
