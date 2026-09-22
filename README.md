@@ -1,10 +1,10 @@
-# 🚀 AI Skill Monetization Predictor
+#  AI Skill Monetization Predictor
 
 An intelligent **Flask-based web application** that helps users discover practical ways to monetize their existing skills. The system analyzes a user's skills, proficiency, experience level, and interests, then evaluates them against a curated skill and market-opportunity catalog to generate personalized monetization paths, skill-gap recommendations, and a 30-day action roadmap.
 
 ---
 
-## 📌 Overview
+##  Overview
 
 The **AI Skill Monetization Predictor** is designed to answer a simple question:
 
@@ -27,7 +27,7 @@ The final results are presented through an interactive dashboard.
 
 ---
 
-## 🎯 Project Objectives
+##  Project Objectives
 
 The main objectives of the project are to:
 
@@ -42,9 +42,9 @@ The main objectives of the project are to:
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🧠 Intelligent Skill Matching
+###  Intelligent Skill Matching
 
 The system uses **TF-IDF vectorization and cosine similarity** to match user-entered skills with the internal skill catalog.
 
@@ -68,7 +68,7 @@ This allows the system to handle different wording and variations instead of req
 
 ---
 
-### 💰 Monetization Opportunity Prediction
+###  Monetization Opportunity Prediction
 
 The prediction engine evaluates the user's skills and generates possible monetization paths such as:
 
@@ -84,7 +84,7 @@ The recommendations are based on the skill catalog, demand levels, proficiency, 
 
 ---
 
-### 📊 Market Demand Analysis
+###  Market Demand Analysis
 
 Each skill in the catalog contains a market-demand score and an estimated hourly earning range.
 
@@ -107,7 +107,7 @@ Fiverr
 
 ---
 
-### 🧩 Skill Gap Detection
+###  Skill Gap Detection
 
 The application identifies complementary skills that users may need to develop to expand their monetization opportunities.
 
@@ -128,7 +128,7 @@ This gives users a practical direction for further skill development.
 
 ---
 
-### 🗺️ 30-Day Roadmap
+###  30-Day Roadmap
 
 The system generates a structured roadmap based on the recommended monetization paths and identified skill gaps.
 
@@ -156,7 +156,7 @@ Start outreach and acquire first client
 
 ---
 
-### 📈 Category Coverage
+### Category Coverage
 
 Skills are grouped into categories such as:
 
@@ -172,7 +172,7 @@ The dashboard calculates the user's coverage across these categories.
 
 ---
 
-### 💾 Persistent Prediction Results
+###  Persistent Prediction Results
 
 Every prediction is stored in the database.
 
