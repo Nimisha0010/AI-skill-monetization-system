@@ -1,4 +1,4 @@
-# AI Skill Monetization Predictor — Flask edition
+# AI Skill Monetization Predictor 
 
 A Flask + SQLite (swappable for MySQL/Postgres) rebuild of the Skill Ledger
 dashboard: enter your skills, get ranked monetization paths, a category
